@@ -21,7 +21,7 @@ module LibExcel
     #
     # @return [Document] the Full XML document
     def <<(worksheet)
-      if not worksheet.is_a? LibExcel::Worksheet
+      if not worksheet.is_a? Worksheet
         raise ArgumentError, "Need to have a Excel::Worksheet"
       end
       root << worksheet

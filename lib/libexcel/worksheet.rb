@@ -89,7 +89,7 @@ module LibExcel
     # Creates a reference to a cell in this Worksheet to be used in
     # another Worksheet.
     def reference(args, equal = '=')
-      LibExcel::Formula.new("#{equal}'#{name}'!#{LibExcel.static(args[:row], args[:col])}")
+      Formula.new("#{equal}'#{name}'!#{LibExcel.static(args[:row], args[:col])}")
     end
 
     private

@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
      "test/helper.rb",
      "test/worksheet_test.rb"
   ]
-  s.homepage = %q{http:://github.com/silasb/libexcel}
+  s.homepage = %q{http://github.com/silasb/libexcel}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}

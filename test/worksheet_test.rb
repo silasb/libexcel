@@ -62,8 +62,7 @@ class WorksheetTest < Test::Unit::TestCase
 
       should 'add nil data' do
         data = @worksheet.add_cell nil
-        assert_equal "", data.content
-        assert_equal 'String', data['ss:Type']
+        assert_equal nil, data
       end
     end
   end

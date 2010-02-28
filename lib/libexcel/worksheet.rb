@@ -62,9 +62,7 @@ module LibExcel
 
         data << raw_data
       else
-        cell << data = XML::Node.new('Data')
-        data['ss:Type'] = 'String'
-        data << raw_data
+        cell << " "
       end
       data
     end

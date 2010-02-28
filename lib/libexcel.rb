@@ -5,8 +5,6 @@ require 'libexcel/formula'
 
 module LibExcel
 
-  VERSION = "0.1"
-
   class << self
 
     # Creates the full Excel XML equation string

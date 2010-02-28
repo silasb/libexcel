@@ -9,7 +9,7 @@ begin
     gem.summary = "A library that create Xml Excel documents"
     gem.description = "A library that create Xml Excel documents"
     gem.email = "silas.baronda@gmail.com"
-    gem.homepage = "http:://github.com/silasb/libexcel"
+    gem.homepage = "http://github.com/silasb/libexcel"
     gem.authors = ["Silas Baronda"]
     gem.add_development_dependency "shoulda"
     gem.add_dependency('libxml-ruby', '>= 1.1.3')

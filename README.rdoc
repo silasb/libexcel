@@ -1,0 +1,17 @@
+A small ruby library to create Excel XML spreadsheets.
+
+by: Silas Baronda <silas.baronda@REMOVE_MEgmail.com>
+
+== Build it
+
+Download source
+
+   git clone git://github.com/silasb/libexcel.git
+
+Now you need to build it:
+    
+   gem build libexcel.gemspec
+
+Now install:
+
+   gem install libexcel-0.1.1.gem

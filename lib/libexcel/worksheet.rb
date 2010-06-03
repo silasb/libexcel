@@ -18,7 +18,7 @@ module LibExcel
     def initialize(name)
       super('Worksheet')
       # Excel complains if the name is more than 31 chars.
-      self['ss:Name'] = name[0..30]
+      self.name = name
       self.append table
       @f_column = XML::Node.new('Column')
       @f_column['ss:Width'] = DEFAULT_COLUMN_WIDTH
@@ -35,7 +35,7 @@ module LibExcel
 
     # Sets the +name+ and retuncates it to 31 chars.
     def name=(name)
-      self['ss:Name'] = name[0..30]
+      self['ss:Name'] = name.truncate
     end
 
     def f_column=(value)
@@ -97,5 +97,25 @@ module LibExcel
       table['x:FullRows'] = '1'
       @table = table
     end
+  end
+end
+
+class String
+  def truncate
+    return self if self.length <= 30
+
+    half_length = self.length / 2
+    lstring = self[0, half_length].rtruncate(half_length-(half_length-13))
+    rstring = self[half_length, self.length].ltruncate(half_length-13)
+    lstring << (self.length % 2 != 0 ? "..." : "....") << rstring
+    lstring
+  end
+
+  def rtruncate(to)
+    self[0,to]
+  end
+
+  def ltruncate(to)
+    self[to, self.length]
   end
 end

@@ -30,9 +30,9 @@ class WorksheetTest < Test::Unit::TestCase
 
     should 'truncate name 31 chars' do
       @worksheet.name = '12345678901234567890123456789012' # 31
-      assert_equal '1234567890123456789012345678901', @worksheet.name
+      assert_equal '1234567890123....0123456789012', @worksheet.name
       @worksheet.name = '123456789012345678901234567890112312312312312312312'
-      assert_equal '1234567890123456789012345678901', @worksheet.name
+      assert_equal '1234567890123...12312312312312', @worksheet.name
       @worksheet.name = '1'
       assert_equal '1', @worksheet.name
     end
@@ -89,9 +89,26 @@ class WorksheetTest < Test::Unit::TestCase
       assert_equal 'New Name', @work.name
     end
 
-    should 'make sure that you can not add a name over 30 chars' do
-      @work.name='ThisStringIsClearlyOverThirtyChars'
-      assert_equal 'ThisStringIsClearlyOverThirtyCh', @work.name
+    context 'assigning a name over 30 chars' do
+      should 'make sure that you can not add a name over 30 chars' do
+        @work.name='ThisStringIsClearlyOverThirtyChars'
+        assert_equal 'ThisStringIsC....erThirtyChars', @work.name
+      end
+
+      should 'make sure that it gives 3 dots when odd' do
+        @work.name='ThisStringIsClearlyOverThirtyCharss'
+        assert_equal 'ThisStringIsC...erThirtyCharss', @work.name
+      end
+
+      should 'make sure that it gives 4 dots when even' do
+        @work.name='ThisStringIsClearlyOverThirtyCha'
+        assert_equal 'ThisStringIsC....OverThirtyCha', @work.name
+      end
+
+      should 'be less than 30 chars' do
+        @work.name='ThisStringIsClearlyOver'
+        assert_equal 'ThisStringIsClearlyOver', @work.name
+      end
     end
 
     should 'return its column width' do
@@ -148,11 +165,11 @@ class WorksheetTest < Test::Unit::TestCase
     end
 
     should 'have its name set to 30 chars' do
-      assert_equal 'ThisStringIsClearlyOverThirtyCh', @work.name
+      assert_equal 'ThisStringIsC....erThirtyChars', @work.name
     end
 
     should 'make a reference that has its name set to 30 chars' do
-      assert_equal 'ThisStringIsClearlyOverThirtyCh',
+      assert_equal 'ThisStringIsC....erThirtyChars',
         @work.reference(:row => 1).xml['ss:Formula'].split("'")[1]
     end
 
@@ -162,5 +179,26 @@ class WorksheetTest < Test::Unit::TestCase
         @work.reference(:row => 1).xml['ss:Formula'].split("'")[1]
     end
   end
- 
+
+  context 'creating a worksheet with a name over 30 chars' do
+    should 'make sure that you can not add a name over 30 chars' do
+      @work = LibExcel::Worksheet.new('ThisStringIsClearlyOverThirtyChars')
+      assert_equal 'ThisStringIsC....erThirtyChars', @work.name
+    end
+
+    should 'make sure that it gives 3 dots when odd' do
+      @work = LibExcel::Worksheet.new('ThisStringIsClearlyOverThirtyCharss')
+      assert_equal 'ThisStringIsC...erThirtyCharss', @work.name
+    end
+
+    should 'make sure that it gives 4 dots when even' do
+      @work = LibExcel::Worksheet.new('ThisStringIsClearlyOverThirtyCha')
+      assert_equal 'ThisStringIsC....OverThirtyCha', @work.name
+    end
+
+    should 'be less than 30 chars' do
+      @work = LibExcel::Worksheet.new('ThisStringIsClearlyOver')
+      assert_equal 'ThisStringIsClearlyOver', @work.name
+    end
+  end
 end

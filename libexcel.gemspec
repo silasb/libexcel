@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = "libexcel"
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Silas Baronda"]
   s.email = ["silas.baronda@gmail.com"]
-  s.date = %q{2010-02-28}
+  s.date = %q{2010-06-03}
   s.description = "A library that create Xml Excel documents"
   s.summary = "A library that create Xml Excel documents"
   s.extra_rdoc_files = [

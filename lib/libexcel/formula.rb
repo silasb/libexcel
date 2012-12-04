@@ -38,6 +38,12 @@ module LibExcel
       Formula.new(org_f) 
     end
 
+    def +(formula)
+      org_f = self.xml['ss:Formula']
+      org_f << '+' << formula.xml['ss:Formula'][1..-1]
+      Formula.new(org_f)
+    end
+
     def self.node_correct?(node)
       digit_block = /(\[-?\d+\])?/
       r_d_block = /R#{digit_block}C#{digit_block}/

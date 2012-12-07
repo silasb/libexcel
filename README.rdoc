@@ -1,3 +1,6 @@
+== Don't use this.  There is problems getting it to work with all excel platforms.  Use writeexcel instead.  It is cleaner, maintained, and faster.
+
+
 A small ruby library to create Excel XML spreadsheets.
 
 by: Silas Baronda <silas.baronda@REMOVE_MEgmail.com>
